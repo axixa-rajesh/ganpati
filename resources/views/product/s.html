@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Animation</title>
+    <style>
+        /* CSS for the price container */
+        .price-container {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            position: relative;
+        }
+
+        .original-price {
+            color: gray;
+            position: relative;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        .original-price::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: red;
+            transition: width 0.5s ease;
+        }
+
+        .discounted-price {
+            color: green;
+            font-weight: bold;
+            margin-left: 15px;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(-10px);
+        }
+
+        /* When animation triggers */
+        .strike .original-price {
+            color: lightgray;
+        }
+
+        .strike .original-price::after {
+            width: 100%;
+        }
+
+        .strike .discounted-price {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="price-container" id="price-container">
+        <span class="original-price" id="original-price">$100</span>
+        <span class="discounted-price" id="discounted-price">$80</span>
+    </div>
+
+    <script>
+        // Adding the animation on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const priceContainer = document.getElementById('price-container');
+
+            // Trigger the animation after a slight delay
+            setTimeout(() => {
+                priceContainer.classList.add('strike');
+            }, 500); // Delay for visual effect
+        });
+    </script>
+</body>
+
+</html>
