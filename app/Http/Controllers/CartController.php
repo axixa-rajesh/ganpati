@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -13,6 +14,9 @@ class CartController extends Controller
     public function index()
     {
         //
+        
+        $cart = Cart::where('user_id',(Auth::user()->id))->get();
+        dd($cart);
     }
 
     /**
@@ -29,6 +33,24 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //
+        $f=0;
+        $cart=Cart::where('user_id',$request->user_id)->where('price_id',$request->price_id)->get();
+        if(!count($cart)){
+           $f=1;
+            $cart=new Cart();
+        }else{
+            $cart=$cart[0];
+            if(!$request->qty){
+                $cart->delete();
+                return "Remove Item From Cart!";
+            }
+        }
+         $cart->product_id=$request->product_id;
+        $cart->user_id=$request->user_id;
+        $cart->price_id=$request->price_id;
+        $cart->qty=$request->qty;
+        $cart->save();
+        return $f?"Item Added":"Item Updated";
     }
 
     /**

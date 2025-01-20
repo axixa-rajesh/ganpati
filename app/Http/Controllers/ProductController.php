@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Price;
 use App\Models\Media;
@@ -91,6 +92,9 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+    
+        // $cart = Cart::where('user_id', 1)->where('price_id', 7)->get();
+        // dd($cart[0]);
         return view('product.show',['info'=>$product]);
     }
 

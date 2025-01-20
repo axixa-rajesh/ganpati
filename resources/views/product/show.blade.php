@@ -211,16 +211,16 @@
                                                 
                                                 ₹{{ $price['finalprice'] }}</span> &nbsp;
                                             <span class="original-price" id="original-price">₹{{ $price['price'] }}</span>&nbsp;
-                                            <span class="text-success" >{{  round($price['finalprice']/$price['price']*100,2) }}% off</span>
+                                            <span class="text-success" >{{  round((($price['price']-$price['finalprice'])/$price['price']*100),2) }}% off</span>
                                         </div>
                                         <div>
                                             @if (Auth::user())
                                                 <div class="qty-container">
                                                     <div>
-                                                        <input type="number" name="qty" class="txtbox" placeholder="Enter Quantity">
+                                                        <input type="number" name="qty" class="txtbox" placeholder="Enter Quantity" id="qty_{{ $price['id'] }}">
                                                     </div>
                                                     <div>
-                                                        <i class="fa-solid fa-cart-plus"></i>
+                                                        <i class="fa-solid fa-cart-plus" onclick="addToCart( '{{ $product['id'] }}',{{ Auth::user()->id }},'{{ $price['id']}}')"></i>
                                                     </div>
 
                                                 </div>
@@ -239,6 +239,7 @@
                 </div>
             </div>
         </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script>
             const mainImage = document.getElementById('mainImage');
@@ -285,5 +286,28 @@
                     priceContainer[i].classList.add('strike');
             }, 500); // Delay for visual effect
         });
+        function addToCart(product_id,user_id,price_id){
+             let token = '@csrf';
+            token = token.substr(42, 40);
+            let qty=document.getElementById('qty_'+price_id).value;
+            if(qty){
+                let info={
+                    product_id,user_id,price_id,qty,_token:token
+                };
+                $.ajax({
+                    url:'/cart/',
+                    type:'post',
+                    data:info,
+                    success:function(r){
+                        alert(r);
+                    },
+                    error:function(e){
+                        console.log(e);
+                    }
+                })
+            }else{
+                alert("Enter Quantity!");
+            }
+        }
         </script>
     @endsection
