@@ -15,8 +15,8 @@ class CartController extends Controller
     {
         //
         
-        $cart = Cart::where('user_id',(Auth::user()->id))->get();
-        dd($cart);
+        $data = Cart::where('user_id',(Auth::user()->id))->get();
+       return view('cart.index',compact('data'));
     }
 
     /**
@@ -83,5 +83,7 @@ class CartController extends Controller
     public function destroy(Cart $cart)
     {
         //
+        $cart->delete();
+        return redirect("/cart");
     }
 }

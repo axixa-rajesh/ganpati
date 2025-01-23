@@ -6,6 +6,8 @@
     <title>Sweet Shop</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
     <!-- Custom CSS -->
     <style>
         body {
@@ -33,6 +35,8 @@
             margin-top: 50px;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 <body>
     <!-- Navbar -->
@@ -66,6 +70,7 @@
                                 </li>
                             @endif
                         @else
+                      
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -83,6 +88,9 @@
                                     </form>
                                 </div>
                             </li>
+                               <li class="nav-item">
+                                    <a class="nav-link" href="/cart" title="Show Cart" ><i class="fa-solid fa-cart-shopping" style="color: rgb(31, 31, 102)"></i></a>
+                                </li>
                         @endguest
                 </ul>
             </div>
@@ -90,7 +98,7 @@
     </nav>
 
     <!-- Header Slider -->
-    <div id="headerCarousel" class="carousel slide" data-bs-ride="carousel">
+    {{-- <div id="headerCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="https://via.placeholder.com/1920x400" class="d-block w-100" alt="Delicious Sweet 1">
@@ -122,7 +130,7 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
-    </div>
+    </div> --}}
 
     <!-- Main Content -->
     <main>
