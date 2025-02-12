@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shipping;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShippingController extends Controller
 {
@@ -29,6 +30,14 @@ class ShippingController extends Controller
     public function store(Request $request)
     {
         //
+        Shipping::create([
+            'name' => $request['name'],
+            'user_id' => Auth::user()->id,
+            'mobile' => $request['mobile'],
+            'address' => $request['address'],
+           
+        ]);
+        return redirect('/cart');
     }
 
     /**

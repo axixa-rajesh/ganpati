@@ -53,6 +53,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/product/all">Products</a>
+                    </li>  
+                    <li class="nav-item">
+                        <a class="nav-link" href="/myorder">My Order</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>

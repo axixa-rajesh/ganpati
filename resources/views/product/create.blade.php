@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('content')
     <form action="/product" method="post" enctype="multipart/form-data">
